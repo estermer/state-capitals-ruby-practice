@@ -151,3 +151,43 @@
     name: "Wyoming",
     capital: "Cheyenne"
 }]
+
+#Start with a shuffle to get a random order
+states = states.shuffle
+
+puts "Let's study up on state capitals."
+
+#Initialize new keys to store the number of times a user gets a state right
+# and wrong
+states.each do |state|
+  state[:num_correct] = 0
+  state[:num_wrong] = 0
+end
+
+# until the user decides to end the game...
+while true
+  #Ask the user to name the capital of each state.
+  states.each do |state|
+    puts "What is the capital of " + state[:name] + "?"
+
+    answer = gets.chomp
+    #If the answer is correct, increment the correct counter
+    if answer.upcase == state[:capital].upcase
+      puts "Correct!"
+      state[:num_correct] += 1
+    else
+      #If the answer is wrong, increment the wrong counter
+      puts "Incorrect, the capital is #{state[:capital]}."
+      state[:num_wrong] += 1
+    end
+    # Let the user know success rate
+    total = state[:num_correct] + state[:num_wrong]
+    puts "You are #{state[:num_correct]} for #{total} on that."
+  end
+  # Give the user the option to stop or go through the states again
+  puts "Continue (Y/N)?"
+  answer = gets.chomp
+  break if answer.upcase == "N"
+  # Sort so that the states are in order of fewest correct
+  states = states.sort_by { |state| state[:num_correct]}
+end

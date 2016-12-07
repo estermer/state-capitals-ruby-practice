@@ -8,7 +8,7 @@
 # After each prompt, display a message telling the reader how many times the state was answered correctly out of the total number of times answered.
 # Once the user has gone through all 50 states, ask them if they'd like to play again.
 
-require_relative 'capitals'
+
 
 # Your program should prompt the user to identify the capital associated with a given state.
 
@@ -28,7 +28,7 @@ require_relative 'capitals'
 
 # Through all 50 states, prompt the user to name the capital of the state.
 
-
+require_relative 'capitals'
 
 
 def game_play

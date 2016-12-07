@@ -1,108 +1,64 @@
-#
-#
-# Initialize new keys in the hashes that store the number of times a user gets a capital correct and the number of times the answer is wrong.
-#
-#
-# If the answer is correct, display a message saying so, and increment the correct key.
-# If the answer is wrong, display a message saying so, and increment the wrong key.
-# After each prompt, display a message telling the reader how many times the state was answered correctly out of the total number of times answered.
-# Once the user has gone through all 50 states, ask them if they'd like to play again.
-
-
-
-# Your program should prompt the user to identify the capital associated with a given state.
-
-
-# There should be running tallies on the number of correct and incorrect answers for each state
-
-
-# After getting through all 50 states one time, users should be asked whether or not they want to play again.
-
-
-# Make sure the states don't appear in alphabetical order in the prompts. This will make the game a bit more challenging for the user.
-
-
-# Provide a welcome message to introduce the player to the game.
-
-
-
-# Through all 50 states, prompt the user to name the capital of the state.
-
 require_relative 'capitals'
 
-
+# define a method to be called recursively within itself if the player wants to play again
 def game_play
+
+  # variable to contain wrong and right answer totals
   tally_correct = 0
   tally_incorrect = 0
-  play_again = ""
+  # create a new instance of a shuffled array of the states
   states = @states.shuffle
+  # itterator through our while loop for which state element we are accessing
   index = 0
+  # a boolean to exit the game early
   game = true
 
+  #intro the user to the game
   puts "Welcome To State Capitals"
   puts "You can hit ENTER to exit the game."
 
+  # while loop that will keep going until the user changes game to false
   while game
 
+    #ask the user to answer the question and get their response
     question = "What is the capital of #{states[index][:name]}?"
     puts question
     response = gets.chomp.downcase
 
-    # exit while condition
+
     if response == ""
+      # exit while condition
       game = false
     elsif response == states[index][:capital].downcase
+      # correct response
       puts "Your Correct!"
       tally_correct += 1
     elsif response != states[index][:capital].downcase
+      #wrong response
       puts "Your Wrong!"
       tally_incorrect += 1
     end
 
+    #increase the index to get the next element in the array
     index += 1
   end
 
+  # after game is over, let the user know their totals
+  # ask if they wanna play again
   puts "You got #{tally_correct} capitals correct"
   puts "You got #{tally_incorrect} capitals incorrect"
   puts "Would you like to play again? 'yes or no'"
   play_again = gets.chomp
 
+  # check if the user wants to play again or not
   if play_again == "yes"
+    # call game_play to refire the game
     game_play
   else
+    # let the game just end
     puts "Thank you for playing. Good Bye."
   end
 end
 
+#initialize the game once the file is run
 game_play
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-######
